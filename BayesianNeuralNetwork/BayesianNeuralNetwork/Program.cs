@@ -14,65 +14,77 @@ namespace BayesianNeuralNetwork
         [STAThread]
         static void Main()
         {
-            LoadData();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
 
+        /*Graph graph = new Graph("cancer.txt");
+            /for (int i = 0; i < graph.nodes.Count; ++i)
+            {
+                Console.WriteLine($"{graph.nodes[i].tag} -> {graph.nodes[i].True() * 100}%");
+            }
+        var dependents = new List<Tuple<Node, int>>();
+        dependents.Add(new Tuple<Node, int>(graph.nodes[3], 1));
+            dependents.Add(new Tuple<Node, int>(graph.nodes[4], 0));
+            for (int i = 0; i<graph.nodes.Count; ++i)
+            {
+                Console.WriteLine($"{graph.nodes[i].tag} -> {graph.queryProbability(graph.nodes[i], dependents) * 100}%");
+            }
         public static List<Node> LoadData()
         {
             List<Node> graph = new List<Node>();
             Node Asia = new Node("Asia");
-            Asia.probabilityTable.Add(new List<float> { 0.99f, 0.01f });
+            Asia.probabilityTable.Add(new List<double> { 0.99f, 0.01f });
             Node Tub = new Node("Has Tuberculosis");
             Asia.AddSon(Tub);
-            Tub.probabilityTable.Add(new List<float> { 0.99f, 0.01f });
-            Tub.probabilityTable.Add(new List<float> { 0.95f, 0.05f });
+            Tub.probabilityTable.Add(new List<double> { 0.99f, 0.01f });
+            Tub.probabilityTable.Add(new List<double> { 0.95f, 0.05f });
             Node Smoker = new Node("Smoker");
-            Smoker.probabilityTable.Add(new List<float> { 0.5f, 0.5f });
+            Smoker.probabilityTable.Add(new List<double> { 0.5f, 0.5f });
             Node Lung = new Node("Has Lung Cancer");
             Smoker.AddSon(Lung);
-            Lung.probabilityTable.Add(new List<float> { 0.99f, 0.01f });
-            Lung.probabilityTable.Add(new List<float> { 0.9f, 0.1f });
+            Lung.probabilityTable.Add(new List<double> { 0.99f, 0.01f });
+            Lung.probabilityTable.Add(new List<double> { 0.9f, 0.1f });
             Node Bronchite = new Node("Has Bronchitis");
             Smoker.AddSon(Bronchite);
-            Bronchite.probabilityTable.Add(new List<float> { 0.7f, 0.3f });
-            Bronchite.probabilityTable.Add(new List<float> { 0.4f, 0.6f });
+            Bronchite.probabilityTable.Add(new List<double> { 0.7f, 0.3f });
+            Bronchite.probabilityTable.Add(new List<double> { 0.4f, 0.6f });
             Node Either = new Node("Tuberculosis or Cancer");
 
             Tub.AddSon(Either);
             Lung.AddSon(Either);
             
-            Either.probabilityTable.Add(new List<float> { 1.0f, 0.0f });
-            Either.probabilityTable.Add(new List<float> { 0.0f, 1.0f });
-            Either.probabilityTable.Add(new List<float> { 0.0f, 1.0f });
-            Either.probabilityTable.Add(new List<float> { 0.0f, 1.0f });
+            Either.probabilityTable.Add(new List<double> { 1.0f, 0.0f });
+            Either.probabilityTable.Add(new List<double> { 0.0f, 1.0f });
+            Either.probabilityTable.Add(new List<double> { 0.0f, 1.0f });
+            Either.probabilityTable.Add(new List<double> { 0.0f, 1.0f });
             Node Dyspnea = new Node("Dyspnea");
             Either.AddSon(Dyspnea);
             Bronchite.AddSon(Dyspnea);
            
-            Dyspnea.probabilityTable.Add(new List<float> { 0.9f, 0.1f });
-            Dyspnea.probabilityTable.Add(new List<float> { 0.3f, 0.7f });
-            Dyspnea.probabilityTable.Add(new List<float> { 0.2f, 0.8f });
-            Dyspnea.probabilityTable.Add(new List<float> { 0.1f, 0.9f });
+            Dyspnea.probabilityTable.Add(new List<double> { 0.9f, 0.1f });
+            Dyspnea.probabilityTable.Add(new List<double> { 0.3f, 0.7f });
+            Dyspnea.probabilityTable.Add(new List<double> { 0.2f, 0.8f });
+            Dyspnea.probabilityTable.Add(new List<double> { 0.1f, 0.9f });
             Node Xray = new Node("XRay Result");
             Either.AddSon(Xray);
-            Xray.probabilityTable.Add(new List<float> { 0.95f, 0.05f });
-            Xray.probabilityTable.Add(new List<float> { 0.02f, 0.98f });
+            Xray.probabilityTable.Add(new List<double> { 0.95f, 0.05f });
+            Xray.probabilityTable.Add(new List<double> { 0.02f, 0.98f });
             graph.Add(Asia);
             graph.Add(Tub);
             graph.Add(Smoker);
-            graph.Add(Bronchite);
             graph.Add(Lung);
+            graph.Add(Bronchite);
+            
             graph.Add(Either);
             graph.Add(Dyspnea);
             graph.Add(Xray);
 
-            /*for(int i = 0; i < graph.Count; ++i)
+            for(int i = 0; i < graph.Count; ++i)
             {
                 Console.WriteLine($"{graph[i].tag} -> {graph[i].True()*100}%");
-            }*/
+            }
 
             
 
@@ -82,28 +94,13 @@ namespace BayesianNeuralNetwork
 
             for (int i = 0; i < graph.Count; ++i)
             {
-                Console.WriteLine($"{graph[i].tag} -> {queryProbability(graph[i],dependents,graph) * 100}%");
-            }
-
-            
-            dependents.Add(new Tuple<Node, int>(Bronchite, 0));
-
-            for (int i = 0; i < graph.Count; ++i)
-            {
-                Console.WriteLine($"{graph[i].tag} -> {queryProbability(graph[i], dependents, graph) * 100}%");
-            }
-
-            dependents.Add(new Tuple<Node, int>(Dyspnea, 0));
-
-            for (int i = 0; i < graph.Count; ++i)
-            {
-                Console.WriteLine($"{graph[i].tag} -> {queryProbability(graph[i], dependents, graph) * 100}%");
+                Console.WriteLine($"{graph[i].nodeName} -> {queryProbability(graph[i],dependents,graph) * 100}%");
             }
 
             return graph;
         }
 
-        public static float queryProbability(Node node, List<Tuple<Node, int>> dependents, List<Node> graph)
+        public static double queryProbability(Node node, List<Tuple<Node, int>> dependents, List<Node> graph)
         {
             var depF = new List<Tuple<Node, int>>();
             var depT = new List<Tuple<Node, int>>();
@@ -112,7 +109,6 @@ namespace BayesianNeuralNetwork
             depT.Add(new Tuple<Node, int>(node, 1));
             depF.Add(new Tuple<Node, int>(node, 0));
             var t = recursive(depT, graph, 0);
-
             var f = recursive(depF, graph, 0);
             if (t + f < 1)
             {
@@ -123,12 +119,10 @@ namespace BayesianNeuralNetwork
             {
                 return t;
             }
-
-            
         }
 
 
-        public static float recursive(List<Tuple<Node,int>> dependents, List<Node> graph, int ind)
+        public static double recursive(List<Tuple<Node,int>> dependents, List<Node> graph, int ind)
         {
             if (ind<graph.Count) {
                 var depF = new List<Tuple<Node, int>>();
@@ -218,7 +212,6 @@ namespace BayesianNeuralNetwork
             {
                 return "";
             }
-        }
-
+        }*/
     }
 }

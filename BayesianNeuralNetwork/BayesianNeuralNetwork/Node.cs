@@ -10,17 +10,17 @@ namespace BayesianNeuralNetwork
     {
         public List<Node> parents;
         public List<Node> sons;
-        public List<List<float>> probabilityTable;
-        public float trueProbabilityNow;
+        public List<List<double>> probabilityTable;
         public string tag;
+        public string nodeName;
         public int states;
 
-        public Node(string tag)
+        public Node(string name)
         {
-            this.tag = tag;
+            this.nodeName = name;
             parents = new List<Node>();
             sons = new List<Node>();
-            probabilityTable = new List<List<float>>();
+            probabilityTable = new List<List<double>>();
             states=2;
         }
 
@@ -30,7 +30,7 @@ namespace BayesianNeuralNetwork
             node.parents.Add(this);
         }
 
-        public float True()
+        public double True()
         {
             if (parents.Count != 0)
             {
@@ -42,7 +42,7 @@ namespace BayesianNeuralNetwork
             }
         }
 
-        public float True(List<Tuple<Node,int>> dependents)
+        public double True(List<Tuple<Node,int>> dependents)
         {
             if (dependents.Count < this.parents.Count)
             {
@@ -59,22 +59,22 @@ namespace BayesianNeuralNetwork
             }
             else
             {
-                float p = getTrueProbability(dependents);
+                double p = getTrueProbability(dependents);
                 foreach(Tuple<Node,int> tuple in dependents)
                 {
-                    float dP = tuple.Item2 == 0 ? tuple.Item1.False() : tuple.Item1.True();
+                    double dP = tuple.Item2 == 0 ? tuple.Item1.False() : tuple.Item1.True();
                     p = p * dP;
                 }
                 return p;
             }
         }
 
-        public float False()
+        public double False()
         {
             return 1 - True();
         }
 
-        public float getTrueProbability(List<Tuple<Node,int>> parentValues)
+        public double getTrueProbability(List<Tuple<Node,int>> parentValues)
         {
             double index = 0;
             for (int i = 0; i < parents.Count; ++i)
@@ -85,10 +85,14 @@ namespace BayesianNeuralNetwork
             return probabilityTable[(int)index][1];
         }
 
-        public float getFalseProbability(List<Tuple<Node, int>> parentValues)
+        public double getFalseProbability(List<Tuple<Node, int>> parentValues)
         {
             return 1 - getTrueProbability(parentValues);
         }
 
+        public void setTag(string tag)
+        {
+            this.tag = tag;
+        }
     }
 }

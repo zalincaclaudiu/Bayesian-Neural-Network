@@ -12,8 +12,13 @@ namespace BayesianNeuralNetwork
 {
     public partial class Form1 : Form
     {
+        public Graph graph;
+        public List<Tuple<Node, int>> queries;
         public Form1()
         {
+            graph = new Graph("cancer.txt");
+            queries = new List<Tuple<Node, int>>();
+            InitializePanels();
             InitializeComponent();
         }
     }

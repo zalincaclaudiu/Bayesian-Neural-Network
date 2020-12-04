@@ -1,0 +1,41 @@
+asia
+Has visited Asia
+0,99 0,01
+
+tub|asia
+Has Tuberculosis
+0 0.99 0.01
+1 0.95 0.05
+
+smoke
+Smoker
+0.5 0.5
+
+lung|smoke
+Has Lung Cancer
+0 0.99 0.01
+1 0.9 0.1
+
+bronc|smoke
+Has Bronchitis
+0 0.7 0.3
+1 0.4 0.6
+
+either|lung,tub
+Has Tuberculosis or Cancer
+0 0 1.0 0.0
+0 1 0.0 1.0
+1 0 0.0 1.0
+1 1 0.0 1.0
+
+xray|either
+Has Xray Result Abnormal
+0 0.95 0.05
+1 0.02 0.98
+
+dysp|bronc,either
+Dyspnea
+0 0 0.9 0.1
+0 1 0.3 0.7
+1 0 0.2 0.8
+1 1 0.1 0.9
