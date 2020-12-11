@@ -10,9 +10,12 @@ namespace BayesianNeuralNetwork
     public class Graph
     {
         public List<Node> nodes;
-
+        public string filename;
         public Graph(string fileName)
         {
+
+            filename = Path.GetFileNameWithoutExtension(fileName);
+
             StreamReader sr = new StreamReader(fileName);
             nodes = new List<Node>();
             while (sr.Peek() != -1)

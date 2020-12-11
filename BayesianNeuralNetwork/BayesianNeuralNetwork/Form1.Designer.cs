@@ -47,15 +47,21 @@ namespace BayesianNeuralNetwork
         }
 
         public void InitializePanels()
-        { 
+        {
+            PictureBox graphImage = new PictureBox();
+            graphImage.Image = Image.FromFile(graph.filename + ".png");
+            graphImage.Location = new Point(180 * (graph.nodes.Count / nrOfLines +1 ), 5);
+            graphImage.SizeMode = PictureBoxSizeMode.AutoSize;
+
+            this.Controls.Add(graphImage);
             panels = new List<CustomPanel>();
             for (int i = 0; i < graph.nodes.Count; ++i)
             {
                 var panel = new CustomPanel(i);
                 panel.nodeProbability = Math.Round(graph.nodes[i].True()*100,2);
 
-                panel.Location = new Point(72, 80 * i + 20);
-                panel.Size = new Size(170, 80);
+                panel.Location = new Point(175*(i/nrOfLines)+5, 75 * (i%nrOfLines)+5);
+                panel.Size = new Size(170, 70);
                 panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
                 panel.BackColor = Color.White;
 
@@ -148,7 +154,6 @@ namespace BayesianNeuralNetwork
                     }
                     Update(queries);
                 };
-
 
                 this.Controls.Add(panel);
                 panels.Add(panel);

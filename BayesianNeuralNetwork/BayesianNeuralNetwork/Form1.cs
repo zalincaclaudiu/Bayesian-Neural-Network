@@ -14,10 +14,12 @@ namespace BayesianNeuralNetwork
     {
         public Graph graph;
         public List<Tuple<Node, int>> queries;
+        public int nrOfLines;
         public Form1()
         {
             graph = new Graph("cancer.txt");
             queries = new List<Tuple<Node, int>>();
+            nrOfLines = 5;
             InitializePanels();
             InitializeComponent();
         }
