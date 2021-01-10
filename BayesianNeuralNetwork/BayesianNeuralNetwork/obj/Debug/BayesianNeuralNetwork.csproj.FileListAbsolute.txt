@@ -8,5 +8,3 @@ E:\Proiect EP si IA\Bayesian-Neural-Network\BayesianNeuralNetwork\BayesianNeural
 E:\Proiect EP si IA\Bayesian-Neural-Network\BayesianNeuralNetwork\BayesianNeuralNetwork\obj\Debug\BayesianNeuralNetwork.exe
 E:\Proiect EP si IA\Bayesian-Neural-Network\BayesianNeuralNetwork\BayesianNeuralNetwork\obj\Debug\BayesianNeuralNetwork.pdb
 E:\Proiect EP si IA\Bayesian-Neural-Network\BayesianNeuralNetwork\BayesianNeuralNetwork\obj\Debug\BayesianNeuralNetwork.Form1.resources
-E:\Proiect EP si IA\Bayesian-Neural-Network\BayesianNeuralNetwork\BayesianNeuralNetwork\bin\Debug\Graphviz.dll
-E:\Proiect EP si IA\Bayesian-Neural-Network\BayesianNeuralNetwork\BayesianNeuralNetwork\obj\Debug\BayesianNeuralNetwork.csproj.CopyComplete
